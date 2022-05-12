@@ -133,11 +133,11 @@ class DiscoverViewController: UIViewController, UITableViewDataSource, UITableVi
         //      From TMDB doc: To build an image URL, you will need 3 pieces of data. The base_url, size and file_path. Simply combine them all and you will have a fully qualified URL.
         let img_base_url = "https://image.tmdb.org/t/p/"
         let poster_size = "w185" //w342
-        let poster_path = movie["poster_path"] as! String
+        let poster_path = movie["poster_path"] as? String ?? ""
         let imgURLString = (img_base_url + poster_size + poster_path)
         let imgURL = URL(string: imgURLString)
         
-        cell.imageView.af.setImage(withURL: imgURL!) //URL is an optional object so force unwrap
+        cell.imageView.af.setImage(withURL: imgURL!, placeholderImage: UIImage(named: "no_image_available")) //URL is an optional object so force unwrap
         return cell
     }
     

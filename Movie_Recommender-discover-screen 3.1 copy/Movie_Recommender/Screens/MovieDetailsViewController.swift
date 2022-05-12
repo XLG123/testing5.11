@@ -119,6 +119,7 @@ class MovieDetailsViewController: UIViewController, UICollectionViewDelegate, UI
             }
             
             movieSynopsis.text = (movie["overview"] as! String)
+			movieSynopsis.textAlignment = NSTextAlignment.justified
             
         }
     }

@@ -68,10 +68,11 @@ extension WatchedListVC:UITableViewDelegate,UITableViewDataSource{
         cell.selectionStyle = .none
         let img_base_url = "https://image.tmdb.org/t/p/"
         let poster_size = "w185" //w342
-        let imgURLString = (img_base_url + poster_size + item.poster_path!)
+        let poster_path = item.poster_path ?? ""
+        let imgURLString = (img_base_url + poster_size + poster_path)
         let imgURL = URL(string: imgURLString)
         
-        cell.imgV.af.setImage(withURL: imgURL!)
+        cell.imgV.af.setImage(withURL: imgURL!, placeholderImage: UIImage(named: "no_image_available"))
         cell.titleLbl.text = item.title
         tableView.separatorColor = UIColor.gray
         tableView.tableHeaderView = UIView() // remove separator at the top of the list
