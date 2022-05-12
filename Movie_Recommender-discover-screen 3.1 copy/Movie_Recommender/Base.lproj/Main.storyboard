@@ -132,22 +132,22 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.070588235294117646" green="0.070588235294117646" blue="0.070588235294117646" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstItem="RIa-wh-PXW" firstAttribute="top" secondItem="KKP-c3-XNr" secondAttribute="bottom" constant="8" symbolic="YES" id="5Pg-Np-x4j"/>
-                                            <constraint firstItem="RIa-wh-PXW" firstAttribute="top" secondItem="RiX-er-gYW" secondAttribute="bottom" constant="8" symbolic="YES" id="6gk-CR-7tf"/>
-                                            <constraint firstItem="wRf-2J-aPl" firstAttribute="leading" secondItem="7Bw-Rq-fop" secondAttribute="leading" constant="8" id="8BE-RF-YMr"/>
+                                            <constraint firstItem="wRf-2J-aPl" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7Bw-Rq-fop" secondAttribute="leading" id="8BE-RF-YMr"/>
                                             <constraint firstItem="KKP-c3-XNr" firstAttribute="top" secondItem="RiX-er-gYW" secondAttribute="top" id="8kp-0z-WMA"/>
                                             <constraint firstItem="IZ1-aF-65v" firstAttribute="leading" secondItem="7Bw-Rq-fop" secondAttribute="leading" constant="8" id="CKq-tc-Xtc"/>
-                                            <constraint firstAttribute="trailing" secondItem="RIa-wh-PXW" secondAttribute="trailing" constant="8" id="EFV-EG-WbK"/>
                                             <constraint firstItem="B5C-NG-vuB" firstAttribute="leading" secondItem="7Bw-Rq-fop" secondAttribute="leading" constant="18" id="H8R-Za-sOj"/>
                                             <constraint firstItem="8gr-KP-IcN" firstAttribute="leading" secondItem="7Bw-Rq-fop" secondAttribute="leading" id="Hye-yg-2Iu"/>
                                             <constraint firstItem="pHk-4j-3Z3" firstAttribute="top" secondItem="IZ1-aF-65v" secondAttribute="bottom" constant="25" id="KYf-Cp-b3I"/>
+                                            <constraint firstItem="RIa-wh-PXW" firstAttribute="leading" secondItem="wRf-2J-aPl" secondAttribute="leading" id="NHg-8W-XKz"/>
                                             <constraint firstItem="pHk-4j-3Z3" firstAttribute="trailing" secondItem="8gr-KP-IcN" secondAttribute="trailing" id="QDL-Fl-0YY"/>
                                             <constraint firstItem="B5C-NG-vuB" firstAttribute="top" secondItem="7Bw-Rq-fop" secondAttribute="top" constant="202" id="SOa-7J-eaO"/>
                                             <constraint firstAttribute="trailing" secondItem="wRf-2J-aPl" secondAttribute="trailing" constant="8" id="Tfm-bW-Lex"/>
                                             <constraint firstItem="KKP-c3-XNr" firstAttribute="top" secondItem="8gr-KP-IcN" secondAttribute="bottom" constant="43" id="Xhz-Sy-XI4"/>
                                             <constraint firstAttribute="trailing" secondItem="RiX-er-gYW" secondAttribute="trailing" constant="14" id="Xvu-Z5-BWf"/>
-                                            <constraint firstItem="wRf-2J-aPl" firstAttribute="top" secondItem="RIa-wh-PXW" secondAttribute="bottom" constant="30" id="Xwz-qK-TaV"/>
-                                            <constraint firstItem="8gr-KP-IcN" firstAttribute="centerX" secondItem="RIa-wh-PXW" secondAttribute="centerX" id="b9w-J1-Hpz"/>
+                                            <constraint firstItem="RIa-wh-PXW" firstAttribute="trailing" secondItem="wRf-2J-aPl" secondAttribute="trailing" id="Xzn-rK-XLk"/>
+                                            <constraint firstItem="RIa-wh-PXW" firstAttribute="leading" secondItem="IZ1-aF-65v" secondAttribute="leading" id="bpo-1H-bBE"/>
+                                            <constraint firstItem="wRf-2J-aPl" firstAttribute="top" secondItem="RIa-wh-PXW" secondAttribute="bottom" constant="30" id="eit-FP-eaV"/>
+                                            <constraint firstItem="RIa-wh-PXW" firstAttribute="top" secondItem="KKP-c3-XNr" secondAttribute="bottom" constant="8" symbolic="YES" id="ept-uo-E0X"/>
                                             <constraint firstAttribute="height" constant="1000" id="i5n-iW-HOY"/>
                                             <constraint firstItem="KKP-c3-XNr" firstAttribute="leading" secondItem="B5C-NG-vuB" secondAttribute="trailing" constant="9" id="jcS-4J-P64"/>
                                             <constraint firstItem="pHk-4j-3Z3" firstAttribute="leading" secondItem="8gr-KP-IcN" secondAttribute="leading" id="k4g-vl-c7M"/>
@@ -157,7 +157,6 @@
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="IZ1-aF-65v" secondAttribute="trailing" constant="20" symbolic="YES" id="qjU-Pp-Mno"/>
                                             <constraint firstItem="KKP-c3-XNr" firstAttribute="firstBaseline" secondItem="RiX-er-gYW" secondAttribute="baseline" id="raD-nV-rm0"/>
                                             <constraint firstItem="IZ1-aF-65v" firstAttribute="top" secondItem="wRf-2J-aPl" secondAttribute="bottom" constant="40" id="stP-6l-7nT"/>
-                                            <constraint firstItem="RIa-wh-PXW" firstAttribute="leading" secondItem="7Bw-Rq-fop" secondAttribute="leading" constant="8" id="yDM-Ji-7gH"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -535,15 +534,15 @@
                                 <color key="backgroundColor" red="0.070588235294117646" green="0.070588235294117646" blue="0.070588235294117646" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="separatorColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="movielistitem" id="1IN-28-xEq">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="movielistitem" id="1IN-28-xEq">
                                         <rect key="frame" x="0.0" y="44.5" width="374" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1IN-28-xEq" id="k59-gw-NsR">
-                                            <rect key="frame" x="0.0" y="0.0" width="345.5" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="20" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="List Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dGg-ro-kB5">
-                                                    <rect key="frame" x="20" y="11" width="305.5" height="26.5"/>
+                                                    <rect key="frame" x="20" y="11" width="334" height="26.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>

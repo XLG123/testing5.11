@@ -420,7 +420,7 @@ class MovieDetailsViewController: UIViewController, UICollectionViewDelegate, UI
             else if results1.count != 0 && results2.count == 0{
                 self.present(watchedNotifyFailure1, animated:true, completion:nil)
             }
-            else if results1.count == 0 && results2.count != 0{
+            else if results1.count == 0 && results2.count != 0 {
                 self.present(watchedNotifyFailure2, animated:true, completion:nil)
             }
 			else if release_date > dateString {
