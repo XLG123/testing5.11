@@ -218,10 +218,12 @@ class MovieDetailsViewController: UIViewController, UICollectionViewDelegate, UI
                 if let movieIndex = likedMovieIds.firstIndex(of: movieSelected["id"] as! Int64) {
                     if movieIndex < likedMovieIds.count {
                         likedMovieIds.remove(at: movieIndex)
+						deleteFromLikesList(indexAt: movieIndex)
                     }
                 }
                 likeBtn.setImage(UIImage(systemName: "hand.thumbsup"), for: .normal)
                 likeBtn.tintColor = UIColor.init(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)
+				
             }
         } else{ // like button was't already pressed, so change it to filled thumbs up button
             likeSelected = true
@@ -236,12 +238,12 @@ class MovieDetailsViewController: UIViewController, UICollectionViewDelegate, UI
     // Else, insert the new movie item to the end of the list
     func addUpdateCurrentMovie(isLike:Bool){
         var item : LikeItem!
-        if let x = storedItem {
+		if let x = storedItem {
             // if an item is already added then we need to update the details (such as title & image)
             item = x
         }else{ // else, insert new item to the end of the list
             item = LikeItem(context: appDel.persistentContainer.viewContext)
-			self.addToWatchedList()
+			self.addToWatchedList2()
         }
         
         item.adult = movieSelected["adult"] as! Bool
@@ -277,7 +279,7 @@ class MovieDetailsViewController: UIViewController, UICollectionViewDelegate, UI
             UIAction(title: "Watched List", handler: {(_) in
                 print("Watched List")
                 // add selected item to watchedlist entity
-                self.addToWatchedList()
+                self.addToWatchedList1()
             }),
         ])
         
@@ -295,7 +297,7 @@ class MovieDetailsViewController: UIViewController, UICollectionViewDelegate, UI
         
         let fetchRequest2 = NSFetchRequest<NSManagedObject>(entityName: "WatchedItem")
         
-        let watchNotifySuccess = UIAlertController (title: "You successfully added the movie to the Watch List", message: nil, preferredStyle: UIAlertController.Style.alert)
+        let watchNotifySuccess = UIAlertController (title: "You successfully added the movie to Watch List", message: nil, preferredStyle: UIAlertController.Style.alert)
         let cancelwatchNotify = UIAlertAction(title: "Done", style: UIAlertAction.Style.cancel, handler: nil)
                watchNotifySuccess.addAction(cancelwatchNotify)
         
@@ -350,7 +352,7 @@ class MovieDetailsViewController: UIViewController, UICollectionViewDelegate, UI
     }
     
     // Add a movie to Watched List if it's not in Watched List.
-    func addToWatchedList(){
+    func addToWatchedList1(){
 		
 		//get current time
 		let currentTime = Date();
@@ -368,7 +370,7 @@ class MovieDetailsViewController: UIViewController, UICollectionViewDelegate, UI
         
         let fetchRequest2 = NSFetchRequest<NSManagedObject>(entityName: "WatchItem")
         
-        let watchedNotifySuccess = UIAlertController (title: "You successfully added the movie to the Watched List", message: nil, preferredStyle: UIAlertController.Style.alert)
+        let watchedNotifySuccess = UIAlertController (title: "You successfully added the movie to Watched List", message: nil, preferredStyle: UIAlertController.Style.alert)
         let cancelwatchedNotify = UIAlertAction(title: "Done", style: UIAlertAction.Style.cancel, handler: nil)
                watchedNotifySuccess.addAction(cancelwatchedNotify)
         
@@ -432,6 +434,76 @@ class MovieDetailsViewController: UIViewController, UICollectionViewDelegate, UI
         }
         
     }
+	
+	//	For Like button only.
+	//	Remove notifications when like button is clicked.
+	//	A duplicated version of addToWatched1() func, but without the notifications.
+	func addToWatchedList2(){
+		
+		//get current time
+		let currentTime = Date();
+		let df = DateFormatter();
+		df.dateFormat = "yyyy-MM-dd";
+		let dateString = df.string(from: currentTime);
+		//print(dateString)
+		
+		let managedObjectContext = appDel.persistentContainer.viewContext
+		var results1: [WatchedItem] = []
+		var results2: [WatchItem] = []
+		
+		let fetchRequest1 = NSFetchRequest<NSManagedObject>(entityName: "WatchedItem")
+		let idVal = movieSelected["id"] as! Int64
+		
+		let fetchRequest2 = NSFetchRequest<NSManagedObject>(entityName: "WatchItem")
+		
+//		let watchedNotifySuccess = UIAlertController (title: "You successfully added the movie to both Likes List and Watched List", message: nil, preferredStyle: UIAlertController.Style.alert)
+//		let cancelwatchedNotify = UIAlertAction(title: "Done", style: UIAlertAction.Style.cancel, handler: nil)
+//			   watchedNotifySuccess.addAction(cancelwatchedNotify)
+		
+		// filtering entities with id
+		// check for the specific movie id in the entity
+		fetchRequest1.predicate = NSPredicate(format: "id == %d",idVal)
+		fetchRequest2.predicate = NSPredicate(format: "id == %d",idVal)
+		do {
+			results1 = try managedObjectContext.fetch(fetchRequest1) as! [WatchedItem]
+			results2 = try managedObjectContext.fetch(fetchRequest2) as! [WatchItem]
+			
+			let release_date = movieSelected["release_date"] as! String
+			
+			// If selected item is not found in WatchedItem and the selected movie is already released, then create an entity with details.
+			if results1.count == 0 && results2.count == 0 && release_date <= dateString{
+				let item = WatchedItem(context: appDel.persistentContainer.viewContext)
+				
+				item.adult = movieSelected["adult"] as! Bool
+				item.backdrop_path = movieSelected["backdrop_path"] as? String
+				item.id = movieSelected["id"] as! Int64
+				item.media_type = movieSelected["media_type"] as? String
+				item.original_language = movieSelected["original_language"] as? String
+				item.original_title = movieSelected["original_title"] as? String
+				item.overview = movieSelected["overview"] as? String
+				item.popularity = movieSelected["popularity"] as! Double
+				item.poster_path = movieSelected["poster_path"] as? String
+				item.release_date = movieSelected["release_date"] as? String
+				item.title = movieSelected["title"] as? String
+				item.video = movieSelected["video"] as! Bool
+				item.vote_average = movieSelected["vote_average"] as! Double
+				item.vote_count = movieSelected["vote_count"] as! Int16
+//				self.present(watchedNotifySuccess, animated:true, completion:nil)
+				
+				appDel.saveContext() // save selected movie item to CoreData
+			}
+		}
+		catch {
+			print("error executing fetch request: \(error)")
+		}
+		
+	}
+	
+	func deleteFromLikesList(indexAt: Int) {
+		let ctx = appDel.persistentContainer.viewContext
+		ctx.delete(storedItem!)
+		appDel.saveContext()
+	}
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 150, height: collectionView.frame.size.height)
